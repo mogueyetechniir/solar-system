@@ -19,7 +19,7 @@ jobs:
   unit-testing:
     strategy:
       matrix:
-        node-version: [22, 24, 26]
+        node-version: [22, 24]
         os: [ubuntu-latest, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
 

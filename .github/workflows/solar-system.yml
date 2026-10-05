@@ -41,7 +41,14 @@ jobs:
       # run tests
       - name: Run tests
         run: npm test
-    
+      
+      # archive test results
+      - name: Archive test results
+        uses: actions/upload-artifact@v7
+        with:
+          name: Mocha-test-results
+          path: test-results.xml
+
     # setup MongoDB service
     services:
       mongodb:

@@ -7,11 +7,11 @@ on:
   push:
     branches:
       - main
-      - 'lab/*'
+      - 'labs/*'
 
 # environment variables
 env:
-  MONGO_URI: 'mongodb://localhost:27017/superData?authSource=admin'
+  MONGO_URI: 'mongodb://localhost:27017/superdata?authSource=admin'
   MONGO_USERNAME: ${{ vars.MONGO_USERNAME }}
   MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
 
@@ -44,12 +44,12 @@ jobs:
     
     # setup MongoDB service
     services:
-      mongo:
+      mongodb:
         image: mongo:7
         ports:
           - 27017:27017
         env:
-          MONGO_INITDB_ROOT_USERNAME: ${{ vars.MONGO_USERNAME }}
+          MONGO_INITDB_ROOT_USERNAME: ${{ vars.MONGO_USER }}
           MONGO_INITDB_ROOT_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
         options: >-
           --health-cmd "mongosh --eval 'db.adminCommand(\"ping\")'"

@@ -7,7 +7,7 @@ on:
   push:
     branches:
       - main
-      - 'lab/03-debug'
+      - 'lab/*'
 
 # environment variables
 env:

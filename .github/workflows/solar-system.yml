@@ -22,10 +22,10 @@ jobs:
         node-version: [22, 24]
         os: [ubuntu-latest, macos-latest, windows-latest]
       exclude:
-        - node-version: 22
-          os: windows-latest
-        - node-version: 24
-          os: [windows-latest, macos-latest]
+        - os: windows-latest
+          node-version: 22
+        - os: [windows-latest, macos-latest]
+          node-version: 24
 
     runs-on: ${{ matrix.os }}
 

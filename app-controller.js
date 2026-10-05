@@ -12,13 +12,13 @@ window.onload = function() {
             if (res.ok) {
                 return res.json();
             }
-            thrownewError('Request failed');
-        }).catch(function(error) {
-            console.log(error);
+            throw new Error('Request failed');
         })
         .then(function(data) {
             document.getElementById('hostname').innerHTML = `Pod - ${data.os} `
           //  document.getElementById('environment').innerHTML = ` Env - ${data.env}  `
+        }).catch(function(error) {
+            console.log(error);
         });
 };
 
@@ -46,10 +46,7 @@ function func() {
             if (res2.ok) {
                 return res2.json();
             }
-            thrownewError('Request failed.');
-        }).catch(function(error) {
-            alert("Ooops, We have 8 planets.\nSelect a number from 0 - 8")
-            console.log(error);
+            throw new Error('Request failed.');
         })
         .then(function(data) {
             document.getElementById('planetName').innerHTML = ` ${data.name} `
@@ -61,7 +58,10 @@ function func() {
             const planet_description = ` ${data.description} `
             document.getElementById('planetDescription').innerHTML = planet_description.replace(/(.{80})/g, "$1<br>");
 
-          
+
+        }).catch(function(error) {
+            alert("Ooops, We only have 9 planets and a sun.\nSelect a number from 0 - 9")
+            console.log(error);
         });
 
 }

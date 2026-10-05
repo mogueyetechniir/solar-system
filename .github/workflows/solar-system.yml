@@ -51,7 +51,7 @@ jobs:
 
     # setup MongoDB service
     services:
-      mongodb:
+      mongo:
         image: mongo:7
         ports:
           - 27017:27017

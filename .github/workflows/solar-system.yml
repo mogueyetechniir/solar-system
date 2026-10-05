@@ -37,11 +37,17 @@ jobs:
       # seed the database
       - name: Seed MongoDB
         run: docker exec -i ${{ job.services.mongo.id }} mongosh --quiet -u "$MONGO_USERNAME" -p "$MONGO_PASSWORD" --authenticationDatabase admin superData < scripts/seed.js
-
+      
       # run tests
       - name: Run tests
         run: npm test
-    
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-report
+          path: test-report.xml
+
     # setup MongoDB service
     services:
       mongo:

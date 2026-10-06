@@ -80,5 +80,6 @@ jobs:
       - name: run code coverage
         id: run_code_coverage
         run: npm run coverage
-        continue-on-error: onfailure()
+        # continue-on-error: true
+        if: failure()
  

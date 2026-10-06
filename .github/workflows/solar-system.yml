@@ -88,3 +88,4 @@ jobs:
           name: code-coverage-report
           path: coverage
           retention-days: 5
+        depends-on: run_code_coverage

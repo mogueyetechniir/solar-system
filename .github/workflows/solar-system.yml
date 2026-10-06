@@ -51,7 +51,7 @@ jobs:
 
       # Archive test results even if the tests fail
       - name: Archive test results
-        if: failure() && (steps.unit_testing_step.outcome == 'failure' || steps.unit_testing_step.outcome == 'success')
+        if: always()
         uses: actions/upload-artifact@v7
         with:
           name: test-results

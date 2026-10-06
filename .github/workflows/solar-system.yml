@@ -63,6 +63,7 @@ jobs:
           --health-retries 5
 
   code-coverage:
+    depends-on: unit-testing
     runs-on: ubuntu-latest
 
     steps:
@@ -88,4 +89,4 @@ jobs:
           name: code-coverage-report
           path: coverage
           retention-days: 5
-        depends-on: run_code_coverage
+        

@@ -80,9 +80,5 @@ jobs:
       - name: run code coverage
         id: run_code_coverage
         run: npm run coverage
-        continue-on-error: |
-          if [[ ${{ steps.run_code_coverage.outcome }} == 'failure' ]]; then
-            echo "Code coverage failed, but continuing the workflow."
-            exit 0
-          fi
+        continue-on-error: true
  

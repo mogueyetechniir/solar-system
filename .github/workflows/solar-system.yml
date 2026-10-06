@@ -44,13 +44,14 @@ jobs:
         run: docker exec -i ${{ job.services.mongo.id }} mongosh --quiet -u "$MONGO_USERNAME" -p "$MONGO_PASSWORD" --authenticationDatabase admin superData < scripts/seed.js
       
       # run tests
+      # by default all steps status default to 'success' unless a command fails (non-zero exit code)
       - name: Run tests
         id: unit_testing_step
         run: npm test
 
       # Archive test results even if the tests fail
       - name: Archive test results
-        if: steps.unit_testing_step.outcome == 'failure' || steps.unit_testing_step.outcome == 'success'
+        if: failure() && (steps.unit_testing_step.outcome == 'failure' || steps.unit_testing_step.outcome == 'success')
         uses: actions/upload-artifact@v7
         with:
           name: test-results

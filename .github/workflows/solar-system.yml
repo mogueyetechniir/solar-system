@@ -78,6 +78,8 @@ jobs:
         run: npm ci
 
       - name: run code coverage
+        id: run_code_coverage
         run: npm run coverage
         continue-on-error: true
-      
+        run:
+          coverage: ${{ steps.run_code_coverage.outputs.coverage }}

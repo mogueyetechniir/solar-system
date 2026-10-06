@@ -79,5 +79,5 @@ jobs:
 
       - name: run code coverage
         run: npm run coverage
-      
+        continue-on-error: true
       

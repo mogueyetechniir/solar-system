@@ -136,7 +136,7 @@ jobs:
 
       - name: Test docker image
         run: |
-          docker images
+          docker images \
           docker run --name solar-system-test -d \
             -p 3000:3000 \
             -e MONGO_URI=$MONGO_URI \

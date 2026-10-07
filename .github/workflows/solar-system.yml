@@ -132,7 +132,7 @@ jobs:
         with:
           context: .
           push: false
-          tags: ${{ vars.DOCKER_USERNAME }}/solar-system:latest
+          tags: ${{ vars.DOCKER_USERNAME }}/solar-system:${{ github.sha }}
 
       - name: Test docker image
         run: |

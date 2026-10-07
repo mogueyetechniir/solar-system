@@ -112,3 +112,17 @@ jobs:
           path: coverage
           retention-days: 5
 
+  docker:
+    needs: [unit-testing, code-coverage]
+    runs-on: ubuntu-latest
+
+    steps: 
+      - name: checkout node
+        uses: actions/checkout@v7
+
+      - name: docker login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+    

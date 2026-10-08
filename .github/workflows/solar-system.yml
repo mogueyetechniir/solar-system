@@ -16,6 +16,15 @@ env:
   MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
 
 jobs:
+  debugging_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Debugging in a workflow
+        run: |
+          echo "::notice::Ceci est une notice"
+          echo "::warning::Ceci est un warning"
+          echo "::error::Ceci est une erreur"
+
   unit-testing:
     strategy:
       matrix:
@@ -104,6 +113,11 @@ jobs:
         id: run_code_coverage
         run: npm run coverage
         continue-on-error: true
+
+      - name: Debug coverage
+        run: |
+          echo "::debug::Coverage outcome = ${{ steps.run_code_coverage.outcome }}"
+          echo "::debug::Coverage conclusion = ${{ steps.run_code_coverage.conclusion }}"
  
       - name: Upload code coverage report
         uses: actions/upload-artifact@v7
@@ -149,10 +163,12 @@ jobs:
 
           echo "Waiting for the application to start..."
           wget -q -O - 127.0.0.1:3000/live | grep live
-          
+
       - name: Push docker image
         uses: docker/build-push-action@v7
         with:
           context: .
           push: true
           tags: ${{ vars.DOCKER_USERNAME }}/solar-system:${{ github.sha }}
+
+

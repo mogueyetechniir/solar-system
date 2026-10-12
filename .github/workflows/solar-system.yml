@@ -129,7 +129,10 @@ jobs:
   docker:
     needs: [unit-testing, code-coverage]
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
+      packages: write
+      
     steps: 
       - name: checkout node
         uses: actions/checkout@v7

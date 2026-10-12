@@ -179,9 +179,7 @@ jobs:
           context: .
           push: true
           tags: |
-            # push to DockerHub
             ${{ vars.DOCKER_USERNAME }}/solar-system:${{ github.sha }}
-            # push to GitHub Container Registry (GHCR)
             ghcr.io/${{ github.repository_owner }}/solar-system:${{ github.sha }}
 
 

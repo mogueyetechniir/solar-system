@@ -134,11 +134,20 @@ jobs:
       - name: checkout node
         uses: actions/checkout@v7
 
+      # login to DockerHub
       - name: docker login
         uses: docker/login-action@v2
         with:
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # login to GitHub Container Registry (GHCR)
+      - name: GHCR login
+        uses: docker/login-action@v2
+        with: 
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       # build and push docker image
       - name: build docker image
@@ -164,12 +173,16 @@ jobs:
           echo "Waiting for the application to start..."
           wget -q -O - 127.0.0.1:3000/live | grep live
 
-      - name: Push docker image
+      - name: Push  image to DockerHub and GHCR
         uses: docker/build-push-action@v7
         with:
           context: .
           push: true
-          tags: ${{ vars.DOCKER_USERNAME }}/solar-system:${{ github.sha }}
-          
+          tags: |
+            # push to DockerHub
+            ${{ vars.DOCKER_USERNAME }}/solar-system:${{ github.sha }}
+            # push to GitHub Container Registry (GHCR)
+            ghcr.io/${{ github.repository_owner }}/solar-system:${{ github.sha }}
+
 
 

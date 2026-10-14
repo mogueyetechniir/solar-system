@@ -90,6 +90,8 @@ jobs:
   code-coverage:
     #needs: unit-testing
     runs-on: ubuntu-latest
+    env:
+      MONGO_URI: 'mongodb://mongo:27017/superData?authSource=admin'
     container:
       image: node:24
     services:
@@ -100,7 +102,7 @@ jobs:
         options:
           --name mongo
         env:
-          MONGO_URI: 'mongodb://mongo:27017/superData?authSource=admin'
+          #MONGO_URI: 'mongodb://mongo:27017/superData?authSource=admin'
           MONGO_INITDB_ROOT_USERNAME: ${{ vars.MONGO_USERNAME }}
           MONGO_INITDB_ROOT_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
     steps:
@@ -196,6 +198,6 @@ jobs:
             ${{ vars.DOCKER_USERNAME }}/solar-system:${{ github.sha }}
             ghcr.io/${{ github.repository_owner }}/solar-system:${{ github.sha }}
 
-            
+
 
 

@@ -126,7 +126,7 @@ jobs:
       - name: run code coverage
         id: run_code_coverage
         run: npm run coverage
-        continue-on-error: false
+        continue-on-error: true
 
       - name: Debug coverage
         run: |

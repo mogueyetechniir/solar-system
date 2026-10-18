@@ -205,10 +205,16 @@ jobs:
       - name: checkout code
         uses: actions/checkout@v7
 
-      - name: setup kubectl
-        uses: azure/setup-kubectl@v3
+      - name: Install kubectl CLI
+        uses: azure/setup-kubectl@v5
         with:
-          version: 'latest'
+          version: '1.37.0'
+
+      - name: Setup Kubeconfig
+        uses: azure/k8s-set-context@v5
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG_DEV }}
 
       - name: Fetch kubeconfig
         run: |

@@ -16,15 +16,6 @@ env:
   MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
 
 jobs:
-  debugging_job:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Debugging in a workflow
-        run: |
-          echo "::notice::Ceci est une notice"
-          echo "::warning::Ceci est un warning"
-          echo "::error::Ceci est une erreur"
-
   unit-testing:
     strategy:
       matrix:
@@ -218,7 +209,7 @@ jobs:
 
       - name: Fetch kubeconfig
         run: |
-          kubectl version --short
+          kubectl version
           echo ------------------
           kubectl get nodes
 
